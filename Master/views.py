@@ -50,6 +50,7 @@ def docter_reg(request):
                     username=uname,
                     password=pwd,
                     email=email,
+                    is_active=False,
                 )
                 user.save()
                 u = User.objects.get(id=user.id)  # for fkey
@@ -105,6 +106,7 @@ def Patient_reg(request):
                     username=uname,
                     password=pwd,
                     email=email,
+
                 )
                 user.save()
                 u = User.objects.get(id=user.id)  # for fkey
@@ -137,25 +139,27 @@ def loginView(request):
                     return redirect('admin_dashboard')
                 else:
                     x = PatientModel.objects.filter(user=user.id)
-                    #print(len(x))
+                    # print(len(x))
                     if len(x) > 0:
                         request.session['uid'] = user.id
                         auth.login(request, user)
                         return redirect('phome')
 
                     else:
-                        n=DoctorModel.objects.all()
+                        if not user.is_active:
+                            messages.info(
+                                request, 'account not activated')
+                            return redirect('loginView')
 
-                        print(n.user.first_name)
-                        # if n.is_status:
-                        #     request.session['uid'] = user.id
-                        #     auth.login(request, user)
-                        #     return redirect('DocterDashView')
-                        
+                        else:
+                            request.session['uid'] = user.id
+                            auth.login(request, user)
+                            return redirect('DocterDashView')
+
             else:
                 messages.info(
                     request, 'Invalid Username or Password.')
-                return redirect('login')
+                return redirect('loginView')
 
         return render(request, 'login.html')
     except:
@@ -174,10 +178,11 @@ def logout(request):
 
 #--------------admin-------------------#
 def admin_dashboard(request):
-
-    
-
-
+    m=User.objects.filter(is_active=False)
+    b=m.count()
+    print(list(m),b)
+    for x in m:
+        print(x.id,x.first_name)
 
 
     return render(request, 'dash_admin.html')

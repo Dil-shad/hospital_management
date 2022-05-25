@@ -1,7 +1,9 @@
-from pyexpat import model
-from django.db import models
 
+from django.db import models
+from django.contrib import admin
 # Create your models here.
+
+
 from django.contrib.auth.models import User
 
 # departments = [('Cardiologist', 'Cardiologist'),
@@ -31,22 +33,14 @@ class DoctorModel(models.Model):
         Docter_dep, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(
         upload_to='profile_pic/DoctorProfilePic/', null=True, blank=True)
-    
-    def get_name(self):
-        return self.user.first_name+" "+self.user.last_name
+
+    def __str__(self):
+        return self.user.first_name
 
 
-
-
-
-
-
-
-
-
-
-
-
+# class DocterProfileChk(admin.ModelAdmin):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     list_filter = ["is_active"]
 
 
 class PatientModel(models.Model):
