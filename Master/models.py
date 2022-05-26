@@ -25,7 +25,8 @@ class Docter_dep(models.Model):
 
 
 class DoctorModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True)
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20, null=True)
     is_status = models.BooleanField(default=False)
@@ -34,7 +35,7 @@ class DoctorModel(models.Model):
     image = models.ImageField(
         upload_to='profile_pic/DoctorProfilePic/', null=True, blank=True)
 
-    def __str__(self):
+    def __int__(self):
         return self.user.first_name
 
 

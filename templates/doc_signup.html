@@ -6,27 +6,22 @@
 <div class="row">
     <div class="col"></div>
     <div class="col">
-        {% for message in messages %}
-        <h5>
-            <div class="alert alert-danger mt-5" style="width: 50%;">
-                {{ message }}
-            </div>
-        </h5>
-        {% endfor %}
+
+
         <form action="{% url 'docter_reg' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" name="first_name" class="form-control form-control-lg m-2  " placeholder="First Name">
-            <input type="text" name="last_name" class="form-control form-control-lg m-2 " placeholder="Last Name">
-            <input type="text" name="username" class="form-control form-control-lg m-2 " placeholder="Username">
-            <input type="email" name="email" class="form-control form-control-lg m-2 " placeholder="Email">
-            <input type="password" name="password" class="form-control form-control-lg m-2 "
+            <input type="text" name="first_name" class="form-control form-control-md m-2  " placeholder="First Name">
+            <input type="text" name="last_name" class="form-control form-control-md m-2 " placeholder="Last Name">
+            <input type="text" name="username" class="form-control form-control-md m-2 " placeholder="Username">
+            <input type="email" name="email" class="form-control form-control-md m-2 " placeholder="Email">
+            <input type="password" name="password" class="form-control form-control-md m-2 "
                 placeholder="Strong Password">
-            <input type="password" name="cpassword" class="form-control form-control-lg m-2"
+            <input type="password" name="cpassword" class="form-control form-control-md m-2"
                 placeholder="Confirm Password">
             <!-- -------------------- -->
-            <input name="addr" type="text" id="form3Examplea5" class="form-control form-control-lg m-2"
+            <input name="addr" type="text" id="form3Examplea5" class="form-control form-control-md m-2"
                 placeholder="address" />
-            <input name="ph" type="tel" name="ph" id="" class="form-control form-control-lg m-2"
+            <input name="ph" type="tel" name="ph" id="" class="form-control form-control-md m-2"
                 placeholder='contact number'>
             <select class="form-control m-2" name="department" id="cat">
                 <option selected="selected" disabled>Select Department:~</option>
@@ -37,11 +32,14 @@
                 {% endfor %}
             </select>
             <div class="form-outline form-white">
-                <input type="file" name="file" id="" accept="image/*" class="form-control form-control-lg m-2"
-                    >
-                <label class="form-label" for="form3Examplea9">Profile Picture</label>
+                <label class="form-label mx-2" for="form3Examplea9"> Profile Picture:</label>
+                <input type="file" name="file" id="" accept="image/*" class="form-control form-control-md mx-2 mb-2">
+
             </div>
             <div class="text-center">
+                {% for message in messages %}
+                <p class="text-danger">{{message}}</p>
+                {% endfor %}
                 <button type="submit" class="btn btn-primary w-50">Submit</button>
             </div>
         </form>

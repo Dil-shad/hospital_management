@@ -6,19 +6,23 @@ from .views import *
 urlpatterns = [
 
     path('', index, name='index'),
+    path('docter_reg_view', docter_reg_view, name='docter_reg_view'),
     path('docter_reg', docter_reg, name='docter_reg'),
     path('loginView', loginView, name='loginView'),
     path('logout', logout, name='logout'),
 
-    path('Patient_reg', Patient_reg, name='Patient_reg'),
+
+    path('patient_reg_view', patient_reg_view, name='patient_reg_view'),
+    path('patient_reg', patient_reg, name='patient_reg'),
 
     # ---------------#
     path('admin_dashboard', admin_dashboard, name='admin_dashboard'),
-    path('approve_doc/<int:pk>',approve_doc,name='approve_doc'),
+    path('approve_doc/<int:pk>', approve_doc, name='approve_doc'),
+    path('removeDoc/<int:pk>', removeDoc, name='removeDoc'),
 
     #------dOCTER---#
-    path('DocterDashView',DocterDashView, name='DocterDashView'),
+    path('DocterDashView', DocterDashView, name='DocterDashView'),
 
     #-----P---_#
-    path('phome',phome,name='phome'),
+    path('phome', phome, name='phome'),
 ]

@@ -11,44 +11,45 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm  navbar-dark" style="background-color:  #4e7fb0;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Link</a></li>
-                            <li><a class="dropdown-item" href="#">Another link</a></li>
-                            <li><a class="dropdown-item" href="#">A third link</a></li>
-                        </ul>
-                    </li>
-                </ul>
+    <nav style="height: 120px;background-color: #328090;">
 
-                <button class="btn btn-danger " style="position: absolute;right: 1%;" type="button"><a
-                        href="{% url 'logout' %}">Logout</a></button>
-            </div>
+        <div class="row text-center " style="height: 100%;">
+            <div class="sty col-md-2 p-5"><img src="" alt="logo"></div>
+            <div class=" col-md-4 "></div>
+            <div class="sty col-md-1 pt-5 "><a href="#"><span></span>Gallery</a></div>
+            <div class="sty col-md-1 pt-5 "><a href="#"><span></span>Rsearches</a></div>
+            <div class="sty col-md-1 pt-5 "><a href="#"><span></span>Book Now</a></div>
+            <div class="sty col-md-1 pt-5 "><a href="#"><span></span>Link</a></div>
+            <div class=" col-md-2 p-5"> <button class="btn btn-danger " style="position: absolute;right: 1%;"
+                    type="button"><a style="color: white;text-decoration: none;"
+                        href="{% url 'logout' %}">Logout</a></button></div>
+
         </div>
+
     </nav>
 
-    <div class="container">
+
+    <section style="height:100vh">
 
 
-        
+        <div class="row">
+            <div class="col-4 "></div>
+            <div class="col-8 " style="background-color: #dcdddd;">
+
+
+                <div class="pt-2" style="height: 200px;">
+                    <img class="mx-5" src="" alt="" style="height: 180px;width: 150px;float:left">
+                    <h3 style="float: left;">hshsdh</h3><br>
+                    <h5 style="float: left;">aksjdbhcjkhldsbh</h5>
+
+                </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
 
 
 
@@ -56,12 +57,43 @@
 
 
 
-    </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 </body>
+<style>
+    .sty {
+
+        height: 120px;
+        background-color: #328090;
+        border: hidden;
+
+
+    }
+
+    .sty:hover {
+        background-color: #4a94a3;
+        border-radius: 5%;
+
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+</style>
 
 </html>
