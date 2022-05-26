@@ -6,6 +6,10 @@ from .views import *
 urlpatterns = [
 
     path('', index, name='index'),
+    path('booking_panel_view', booking_panel_view, name='booking_panel_view'),
+
+
+    #------#
     path('docter_reg_view', docter_reg_view, name='docter_reg_view'),
     path('docter_reg', docter_reg, name='docter_reg'),
     path('loginView', loginView, name='loginView'),

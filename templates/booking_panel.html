@@ -1,1 +1,53 @@
-{% extends '' %}
+{% extends 'navbar.html' %}
+
+
+{% block content %}
+
+<section>
+    <div class="container pt-5" style="height: 250px;">
+
+        <h1 style="font-weight: bold;color: #0a2a6c;">Top Multi-Specialty Doctors at HMS</h1>
+        <p style="color: #0a2a6c;">The multi-specialty Doctors at HMS offers advance treatment for different types of
+            health problems by following modern approach & using latest available technology. All our doctors are
+            studied and trained internationally and have years experience in treating patients.</p>
+
+
+
+    </div>
+
+    <div class="row pt-1">
+
+        <div class="col justify-content-center " style="background-color:whitesmoke;">
+            <div style="width: 60%;" class="mx-auto">
+
+                {% for i in docs %}
+                <div class="pt-4 mb-1 border-light" style="height: 235px;background-color: rgb(236, 236, 240);">
+
+
+
+                    <img class="mx-5" src="{{i.image.url}}" alt="" style="height: 180px;width: 150px;float:left">
+                    <h3 style="float: left;" class="fw-bold">{{i.user.first_name}}</h3><br><br>
+                    <p><small>{{i.qualification}}</small></p>
+                    <h5>{{i.department}}</h5>
+                    <br>
+
+                    <div>
+                        <button class="btn btn-outline-light text-black fw-bold">Book An Appoinmnt</button>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+</section>
+
+
+
+
+
+{% endblock content %}

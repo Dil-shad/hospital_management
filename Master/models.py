@@ -30,6 +30,7 @@ class DoctorModel(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20, null=True)
     is_status = models.BooleanField(default=False)
+    qualification = models.CharField(max_length=40, null=True, blank=True)
     department = models.ForeignKey(
         Docter_dep, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(

@@ -1,4 +1,5 @@
 
+from multiprocessing import context
 from django.contrib.auth.models import User, auth
 import os
 from django.conf import settings
@@ -18,6 +19,23 @@ import datetime
 def index(request):
 
     return render(request, 'index.html')
+
+
+def booking_panel_view(request):
+    var = DoctorModel.objects.all()
+    l1 = []
+    for x in var:
+        var1 = User.objects.filter(id=x.user.id, is_active=True)
+        for m in var1:
+            xx = DoctorModel.objects.filter(user=m.id)
+            for y in xx:
+                l1.append(y)
+
+    context = {
+        'docs': l1
+    }
+
+    return render(request, 'booking_panel.html', context)
 
 
 def phome(request):
@@ -41,6 +59,7 @@ def docter_reg(request):
             pwd = request.POST['password']
             cpwd = request.POST['cpassword']
             #--------------------------------------#
+            qualification = request.POST['qualification']
             dep = request.POST['department']
             fdep = Docter_dep.objects.get(id=dep)
             addr = request.POST['addr']
@@ -70,6 +89,7 @@ def docter_reg(request):
                     u = User.objects.get(id=user.id)  # for fkey
                     ex = DoctorModel(
                         user=u,
+                        qualification=qualification,
                         address=addr,
                         mobile=mobile,
                         department=fdep,
@@ -233,7 +253,7 @@ def approve_doc(request, pk):
     print(g.email)
     g.is_active = True
     # print('ACTIVATED')
-    
+
     name = g.first_name
     uname = g.username
     dd = datetime.datetime.now()
@@ -244,12 +264,14 @@ def approve_doc(request, pk):
     message = 'Dear '+name + \
         '\nYour Account is Approved.\nYou can login now.\nUsername:'+uname + '\nDate:'+dt
     recipient = g.email
-
-    send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient])
-    print('mail_send')
-    g.save()
-
-    return redirect('admin_dashboard')
+    try:
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient])
+        print('mail_send')
+        g.save()
+        return redirect('admin_dashboard')
+    except:
+        raise ConnectionError
+        print('-----someting wrong---------------------Check INTERNET-----------------')
 
 
 def removeDoc(request, pk):
