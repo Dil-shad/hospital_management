@@ -121,7 +121,7 @@ def Patient_reg(request):
                     image=image,
                 )
                 x.save()
-                return redirect('/')
+                return redirect('loginView')
 
     return render(request, 'p_signup.html')
 
@@ -177,17 +177,28 @@ def logout(request):
 #-----------UserAuth-----------------#
 
 #--------------admin-------------------#
+
+
 def admin_dashboard(request):
-    m=User.objects.filter(is_active=False)
-    b=m.count()
-    print(list(m),b)
-    for x in m:
-        print(x.id,x.first_name)
+
+    Docter_req = User.objects.filter(is_active=False)
+    b = Docter_req.count()
+    # print(b)
+    context = {
+        'doc_req': Docter_req,
+        'count': b
+    }
+    return render(request, 'dash_admin.html', context)
 
 
-    return render(request, 'dash_admin.html')
+def approve_doc(request, pk):
+    g = User.objects.get(id=pk)
+    print(g)
+    g.is_active = True
+    print('ACTIVATED')
+    g.save()
 
-
+    return redirect('admin_dashboard')
 #_----------doCTER-----------#
 
 

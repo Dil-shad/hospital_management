@@ -2,5 +2,47 @@
 
 
 {% block content %}
- <a href="">new docter</a>
+
+<div class="conatiner">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <table class="table table-striped">
+
+                
+                  
+               
+                <thead>
+                  <tr>
+                    <th>Firstname</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for r in doc_req %}
+                  <tr>
+                    <td>{{r.first_name}}</td>
+                    <td>{{DoctorModel.user.department}}</td>
+                    <td><a href="{% url 'approve_doc' r.id %}">Approve</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 {% endblock content %}

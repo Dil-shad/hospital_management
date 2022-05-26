@@ -14,6 +14,7 @@ urlpatterns = [
 
     # ---------------#
     path('admin_dashboard', admin_dashboard, name='admin_dashboard'),
+    path('approve_doc/<int:pk>',approve_doc,name='approve_doc'),
 
     #------dOCTER---#
     path('DocterDashView',DocterDashView, name='DocterDashView'),
