@@ -17,7 +17,7 @@
 
     <div class="row pt-1">
 
-        <div class="col justify-content-center " style="background-color:whitesmoke;">
+        <div class="col justify-content-center " style="background-color:rgba(245, 245, 245, 0.068);">
             <div style="width: 60%;" class="mx-auto">
 
                 {% for i in docs %}
@@ -26,13 +26,14 @@
 
 
                     <img class="mx-5" src="{{i.image.url}}" alt="" style="height: 180px;width: 150px;float:left">
-                    <h3 style="float: left;" class="fw-bold">{{i.user.first_name}}</h3><br><br>
-                    <p><small>{{i.qualification}}</small></p>
-                    <h5>{{i.department}}</h5>
+                    <h3 style="float: left;color: #42a895;" class="fw-bold">Dr. {{i.user.first_name}}</h3><br><br>
+                    <p><small style="color: #6e81a8;">{{i.qualification}}</small></p>
+                    <h6>{{i.department}}</h6>
                     <br>
 
                     <div>
-                        <button class="btn btn-outline-light text-black fw-bold">Book An Appoinmnt</button>
+                        <button class="btn btn-outline-light text-black fw-bold"><a
+                                href="{% url 'booking_appoinment' i.id %}">Book An Appoinmnt</a></button>
                     </div>
 
                 </div>

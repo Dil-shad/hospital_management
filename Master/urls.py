@@ -7,6 +7,8 @@ urlpatterns = [
 
     path('', index, name='index'),
     path('booking_panel_view', booking_panel_view, name='booking_panel_view'),
+    path('booking_appoinment/<int:pk>',booking_appoinment, name='booking_appoinment'),
+
 
 
     #------#

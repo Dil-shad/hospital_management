@@ -5,6 +5,7 @@ from django.contrib import admin
 
 
 from django.contrib.auth.models import User
+from tomlkit import date
 
 # departments = [('Cardiologist', 'Cardiologist'),
 #                ('Dermatologists', 'Dermatologists'),
@@ -18,7 +19,7 @@ from django.contrib.auth.models import User
 
 class Docter_dep(models.Model):
     department = models.CharField(
-        max_length=50)
+        max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.department
@@ -30,19 +31,14 @@ class DoctorModel(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20, null=True)
     is_status = models.BooleanField(default=False)
-    qualification = models.CharField(max_length=40, null=True, blank=True)
+    qualification = models.CharField(max_length=100, null=True, blank=True)
     department = models.ForeignKey(
         Docter_dep, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(
         upload_to='profile_pic/DoctorProfilePic/', null=True, blank=True)
 
-    def __int__(self):
+    def __str__(self):
         return self.user.first_name
-
-
-# class DocterProfileChk(admin.ModelAdmin):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     list_filter = ["is_active"]
 
 
 class PatientModel(models.Model):
@@ -60,3 +56,21 @@ class PatientModel(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+
+class AppoinmentModel(models.Model):
+    doc = models.CharField(max_length=10)
+    visiter = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.visiter
+
+
+class PayModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    fees = models.CharField(max_length=20, null=True, blank=True)
+    salary = models.CharField(max_length=20, null=True, blank=True)
+
+    def __str__(self):
+        return self.fees

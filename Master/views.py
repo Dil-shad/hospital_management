@@ -38,6 +38,16 @@ def booking_panel_view(request):
     return render(request, 'booking_panel.html', context)
 
 
+@login_required(login_url='loginView')
+def booking_appoinment(request, pk):
+    
+    var = DoctorModel.objects.get(id=pk)
+    context = {
+        'doc': var
+    }
+    return render(request, 'confirm_booking.html', context)
+
+
 def phome(request):
     return render(request, 'p_home.html')
 
@@ -73,9 +83,9 @@ def docter_reg(request):
                 if User.objects.filter(username=uname).exists():
                     messages.info(request, 'username already exists...!!')
                     return redirect('docter_reg')
-                elif User.objects.filter(email=email).exists():
-                    messages.info(request, 'email already registerd..!!')
-                    return redirect('docter_reg')
+                # elif User.objects.filter(email=email).exists():
+                #     messages.info(request, 'email already registerd..!!')
+                #     return redirect('docter_reg')
                 else:
                     user = User.objects.create_user(
                         first_name=fname,
@@ -97,10 +107,11 @@ def docter_reg(request):
                     )
 
                     ex.save()
-                    return redirect('/')
+                    return redirect('docter_reg_view')
             else:
                 messages.info(request, 'paswd doesnt match..!!')
                 return redirect('docter_reg')
+        # return redirect('docter_reg_view')
     except:
         messages.info(request, 'Please Fill The form')
         return redirect('docter_reg_view')
@@ -136,9 +147,9 @@ def patient_reg(request):
                 if User.objects.filter(username=uname).exists():
                     messages.info(request, 'username already exists...!!')
                     return redirect('patient_reg_view')
-                elif User.objects.filter(email=email).exists():
-                    messages.info(request, 'email already registerd..!!')
-                    return redirect('patient_reg_view')
+                # elif User.objects.filter(email=email).exists():
+                #     messages.info(request, 'email already registerd..!!')
+                #     return redirect('patient_reg_view')
                 else:
                     user = User.objects.create_user(
                         first_name=fname,
@@ -218,7 +229,7 @@ def logout(request):
     return redirect('/')
 
 
-#-----------UserAuth-----------------#
+#--------------UserAuth-----------------#
 
 #--------------admin-------------------#
 
