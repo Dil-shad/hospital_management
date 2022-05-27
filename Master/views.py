@@ -40,7 +40,7 @@ def booking_panel_view(request):
 
 @login_required(login_url='loginView')
 def booking_appoinment(request, pk):
-    
+
     var = DoctorModel.objects.get(id=pk)
     context = {
         'doc': var
@@ -299,7 +299,49 @@ def removeDoc(request, pk):
     return redirect('admin_dashboard')
 
 
-#_----------doCTER-----------#
+def doc_detail_view(request, pk):
+
+    x = DoctorModel.objects.get(id=pk)
+    try:
+        y = PayModel.objects.get(user=x.user.id)
+        context = {
+            'ii': x,
+            'jj': y
+        }
+
+        return render(request, 'doc_details.html', context)
+    except:
+
+        context = {
+            'ii': x
+
+        }
+        return render(request, 'doc_details.html', context)
+
+
+def PayModelUpdt(request, pk):
+    if request.method == 'POST':
+        print(pk)
+        u = User.objects.get(id=pk)
+        f = request.POST['fee']
+        s = request.POST['salary']
+
+        uid = u
+        var = PayModel.objects.filter(user=u.id)
+        var.delete()
+        print('----------------'+str(var))
+        mdl = PayModel(
+
+            user=uid,
+            fees=f,
+            salary=s,
+
+        )
+        mdl.save()
+        return redirect('admin_dashboard')
+
+
+#----------doCTER-----------#
 
 
 def DocterDashView(request):

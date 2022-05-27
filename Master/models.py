@@ -68,7 +68,8 @@ class AppoinmentModel(models.Model):
 
 
 class PayModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True)
     fees = models.CharField(max_length=20, null=True, blank=True)
     salary = models.CharField(max_length=20, null=True, blank=True)
 

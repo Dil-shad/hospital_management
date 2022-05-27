@@ -1,0 +1,65 @@
+{% extends 'navbar.html' %}
+
+
+{% block content %}
+
+
+<div class=" container  p-5">
+
+    <div id="doc mx-auto" style="background-color: ghostwhite;" class=" p-5">
+        <div class="text-center img  mx-auto">
+            <img class=" mx-auto" src="{{ii.image.url}}" style="height: 150px;width: 150px;" alt="">
+        </div>
+        <div class=" justify-content-center p-5 ">
+
+            <table class="table table-hover w-50  mx-auto pt-5">
+
+                <tr>
+                    <th>Firstname</th>
+                    <td>{{ii.user.first_name}}</td>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ii.user.email}}</td>
+                <tr>
+                    <th>contact No</th>
+                    <td>{{ii.mobile}}</td>
+                <tr>
+                    <th>Department</th>
+                    <td>{{ii.department}}</td>
+                <tr>
+                    <th>Degree</th>
+                    <td>{{ii.qualification}}</td>
+                <tr>
+                    <form action="{% url 'PayModelUpdt' ii.user.id %}" method="post">
+                        {% csrf_token %}
+                <tr>
+                    <th>Consulting Fees</th>
+                    <td><input type="text" value="{{jj.fees}}" name="fee"></td>
+                <tr>
+                    <th>Salary</th>
+                    <td><input type="text" value="{{jj.salary}}" name="salary"></td>
+
+                <tr>
+
+
+                </tr>
+
+            </table>
+            <div class="text-center">
+                <button class="btn btn-danger mx-auto" type="submit" value="Update">save</button>
+            </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+{% endblock content %}

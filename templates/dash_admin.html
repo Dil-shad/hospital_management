@@ -11,20 +11,20 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Firstname</th>
+            <th>Name</th>
             <th>Department</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {% for a in ACT_DOC %}
-              <tr>
-                <td>{{a.id}}</td>
-                <td>{{a.user.first_name}}</td>
-                <td>{{a.department}}</td>
-                <td><a href="{% url 'removeDoc' a.id %}">remove</a></td>
-              </tr>
-              {% endfor %}
+          <tr>
+            <td>{{a.id}}</td>
+            <td><a href="{% url 'doc_detail_view' a.id %}">{{a.user.first_name}}</a></td>
+            <td>{{a.department}}</td>
+            <td><a href="{% url 'removeDoc' a.id %}">remove</a></td>
+          </tr>
+          {% endfor %}
         </tbody>
       </table>
 

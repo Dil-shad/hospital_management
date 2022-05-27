@@ -10,3 +10,5 @@ admin.site.register(DoctorModel)
 admin.site.register(PatientModel)
 
 admin.site.register(AppoinmentModel)
+
+admin.site.register( PayModel)

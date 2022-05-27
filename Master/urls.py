@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin_dashboard', admin_dashboard, name='admin_dashboard'),
     path('approve_doc/<int:pk>', approve_doc, name='approve_doc'),
     path('removeDoc/<int:pk>', removeDoc, name='removeDoc'),
+    path('doc_detail_view/<int:pk>',doc_detail_view,name='doc_detail_view'),
+    path('PayModelUpdt/<int:pk>',PayModelUpdt,name='PayModelUpdt'),
 
     #------dOCTER---#
     path('DocterDashView', DocterDashView, name='DocterDashView'),
