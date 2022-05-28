@@ -7,7 +7,11 @@ urlpatterns = [
 
     path('', index, name='index'),
     path('booking_panel_view', booking_panel_view, name='booking_panel_view'),
-    path('booking_appoinment/<int:pk>',booking_appoinment, name='booking_appoinment'),
+    path('booking_appoinment/<int:pk>',
+         booking_appoinment, name='booking_appoinment'),
+    path('appoinment_mdl_save/<int:pk>',
+         appoinment_mdl_save, name='appoinment_mdl_save'),
+    path('ContactModelView',ContactModelView, name='ContactModelView'),
 
 
 
@@ -25,12 +29,14 @@ urlpatterns = [
     path('admin_dashboard', admin_dashboard, name='admin_dashboard'),
     path('approve_doc/<int:pk>', approve_doc, name='approve_doc'),
     path('removeDoc/<int:pk>', removeDoc, name='removeDoc'),
-    path('doc_detail_view/<int:pk>',doc_detail_view,name='doc_detail_view'),
-    path('PayModelUpdt/<int:pk>',PayModelUpdt,name='PayModelUpdt'),
+    path('doc_detail_view/<int:pk>', doc_detail_view, name='doc_detail_view'),
+    path('PayModelUpdt/<int:pk>', PayModelUpdt, name='PayModelUpdt'),
 
     #------dOCTER---#
     path('DocterDashView', DocterDashView, name='DocterDashView'),
+    path('Doc_Remove_Patient/<int:pk>',
+         Doc_Remove_Patient, name='Doc_Remove_Patient'),
 
     #-----P---_#
-    path('phome', phome, name='phome'),
+
 ]

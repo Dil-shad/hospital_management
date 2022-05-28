@@ -5,26 +5,54 @@
 
 
 
-<div class="container">
+<div class="container pt-4">
 
     <div class="row">
 
-        <div id="main" class="mt-3" style="border: solid; height: 380px;">
-        
+        <div id="main" class="mt-3"
+            style="border:hidden;border-radius: 2%; height: 380px;background-color: whitesmoke;">
 
 
 
-            <div class="col pt-5">
-                <img src="{{doc.image.url}}" alt="img" style="height: 280px;width: 200px;border: dotted;" class="">
+
+            <div class="col pt-5 float-start">
+                <img src="{{doc.image.url}}" alt=""
+                    style="height: 240px;width: 200px;border:hidden;border-radius: 2%;background-color: ghostwhite;"
+                    class="">
             </div>
-            <div class="col" style="float: left;">
+            <div class="col bg-light p-5 m-5"
+                style="float: left;border:hidden;border-radius: 2%;width: 70%;height: 240px;">
+                <div class="col float-start" style="width: 35%;">
+                    <form action="{% url 'appoinment_mdl_save' doc.id  %}" method="post">
+                        {% csrf_token %}
+                        <h4 class="fw-bold">Dr. {{doc.user.first_name}}</h4>
 
+                        <h6>{{doc.department}}</h6>
+                        <h6><small>Fees INR: {{pmdl.fees}} /-</small></h6>
+                        <!-- DATEPICKER -->
+                        <!-- FEE     -->
+                        <!-- DEF IMG -->
+                </div>
+                <div class="col float-start" style="width: 35%;">
 
+                    <label for="datemax">Current Date: {{dt}}:</label>
+                    <input class="form-control" type="date" id="date" name="bdate" max="{{maxdt}}" min="{{dt}}"><br>
+
+                    <div style="height: 20px;">
+                        {% for message in messages %}
+                        <p class="text-danger">{{message}}</p>
+
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-outline-success mt-4">Book Now</button>
+
+                    </form>
+                </div>
 
 
 
             </div>
-           
+
         </div>
 
 
@@ -35,6 +63,7 @@
     </div>
 
 </div>
+
 
 
 

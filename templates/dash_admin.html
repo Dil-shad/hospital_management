@@ -3,10 +3,49 @@
 
 {% block content %}
 
-<div class="conatiner">
+<div class="conatiner pt-3">
+
   <div class="row">
-    <div class="col-md-8">
-      <h4>Docter LIst</h4>
+    <div class="col-3"></div>
+    <div class="col-2 h-100 text-center  btn-outline-light">
+      <div style="height: 100px;background-color: #0d5572;" class="mx-1">
+        <div class="text-center pt-2">
+          <h2><Strong>{{act_doc_count}}</Strong></h2>
+
+          Active Docters
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 h-100 text-center  btn-outline-light">
+      <div style="height: 100px;background-color: #0d5572;" class="mx-1">
+        <div class="text-center pt-2">
+          <h2><Strong>{{count_req}}</Strong></h2>
+
+          Waiting For Approvel
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 h-100 text-center  btn-outline-light">
+      <div style="height: 100px;background-color: #0d5572;" class="mx-1">
+        <div class="text-center pt-2">
+          <h2><Strong>{{count}}</Strong></h2>
+
+          FeedBack
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+
+
+
+
+  </div>
+  <div class="row mt-3 ">
+    <div class="col-md mx-3">
+      <h4 class="text-center"><strong>Docter LIst</strong></h4>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -20,7 +59,7 @@
           {% for a in ACT_DOC %}
           <tr>
             <td>{{a.id}}</td>
-            <td><a href="{% url 'doc_detail_view' a.id %}">{{a.user.first_name}}</a></td>
+            <td><a href="{% url 'doc_detail_view' a.id %}">Dr. {{a.user.first_name}}</a></td>
             <td>{{a.department}}</td>
             <td><a href="{% url 'removeDoc' a.id %}">remove</a></td>
           </tr>
@@ -36,8 +75,8 @@
 
 
     </div>
-    <div class="col-md-4">
-      <h4>New Docters request</h4>
+    <div class="col-md-4 mx-3">
+      <h4 class="text-center"><strong>Waiting For Approvel</strong></h4>
       <table class="table table-striped">
 
 
@@ -53,7 +92,7 @@
         <tbody>
           {% for r in doc_req %}
           <tr>
-            <td>{{r.first_name}}</td>
+            <td>Dr. {{r.first_name}}</td>
             <td>{{r.email}}</td>
             <td><a href="{% url 'approve_doc' r.id %}">Approve</a></td>
           </tr>
@@ -70,7 +109,57 @@
 </div>
 
 
+<section class=" p-5" style="position: relative; height: 75vh;">
+  <div class="containeer p-5 w-75">
 
+    <div class="text-center">
+      <h4 class="text-center"><strong>Feedbacks</strong></h4>
+    </div>
+    <form action="showemp" method="post">
+      <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Message</th>
+            <th scope="col">action</th>
+
+          </tr>
+        </thead>
+        {% for emp in cobj %}
+        <tbody>
+          <tr>
+            <th scope="row">{{emp.id}}</th>
+            <td>{{emp.name}}</td>
+            <td>{{emp.email}}</td>
+            <td>{{emp.message}}</td>
+            <td>
+              <a href="/delete/{{ emp.id }}"><span class="fa fa-trash text-dark">Delete</span>
+            </td>
+
+          </tr>
+
+        </tbody>
+        {% endfor %}
+      </table>
+
+    </form>
+
+
+
+
+
+
+
+
+
+  </div>
+
+ 
+
+
+</section>
 
 
 

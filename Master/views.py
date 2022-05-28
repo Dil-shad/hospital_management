@@ -3,14 +3,16 @@ from multiprocessing import context
 from django.contrib.auth.models import User, auth
 import os
 from django.conf import settings
-
+from datetime import date, datetime
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from tomlkit import date
+from requests import post
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import datetime
+from datetime import timedelta
+from .forms import *
 # Create your views here.
 
 #---------------INDEX----------------#
@@ -22,6 +24,7 @@ def index(request):
 
 
 def booking_panel_view(request):
+
     var = DoctorModel.objects.all()
     l1 = []
     for x in var:
@@ -41,15 +44,66 @@ def booking_panel_view(request):
 @login_required(login_url='loginView')
 def booking_appoinment(request, pk):
 
+    try:
+        today = datetime.datetime.today()
+        enddate = today+timedelta(days=2)
+
+        s1 = today.strftime("%Y-%m-%d")
+        s2 = enddate.strftime("%Y-%m-%d")
+        # print('------------------------'+str(s1))
+
+        # print('------------------------'+str(s2))
+        var = DoctorModel.objects.get(id=pk)
+        fe = PayModel.objects.get(user=var.user.id)
+
+        context = {
+            'doc': var,
+            'dt': s1,
+            'maxdt': s2,
+            'usr': request.user,
+            'pmdl': fe
+        }
+        return render(request, 'confirm_booking.html', context)
+    except:
+        today = datetime.datetime.today()
+        enddate = today+timedelta(days=3)
+        s1 = today.strftime("%Y-%m-%d")
+        s2 = enddate.strftime("%Y-%m-%d")
+        # print('------------'+str(enddate))
+
+        var = DoctorModel.objects.get(id=pk)
+        context = {
+            'doc': var,
+            'maxdt': s2,
+            'dt': s1,
+            'usr': request.user,
+        }
+        return render(request, 'confirm_booking.html', context)
+
+
+def appoinment_mdl_save(request, pk):
+
     var = DoctorModel.objects.get(id=pk)
-    context = {
-        'doc': var
-    }
-    return render(request, 'confirm_booking.html', context)
+    docter_id = var.id
+    patient_id = request.user
+    if request.method == 'POST':
+        dt = request.POST['bdate']
+        md = AppoinmentModel.objects.filter(visiter=request.user, date=dt)
+        md.delete()
+        if len(dt) != 0:
+            mdl = AppoinmentModel(
+                doc=docter_id,
+                visiter=patient_id,
+                date=dt
+            )
+            mdl.save()
+            messages.info(request, 'we will sent your token soon..!')
+        else:
+            messages.info(request, 'pick a valid date')
+            return redirect('booking_appoinment', pk=var.id)
 
+    return redirect('booking_appoinment', pk=var.id)
 
-def phome(request):
-    return render(request, 'p_home.html')
 
 #-----------UserAuth-----------------#
 
@@ -238,11 +292,14 @@ def admin_dashboard(request):
 
     var = DoctorModel.objects.all()
     l1 = []
+    n = 0
+
     for x in var:
         var1 = User.objects.filter(id=x.user.id, is_active=True)
         for m in var1:
             xx = DoctorModel.objects.filter(user=m.id)
             for y in xx:
+                n = n+1
                 l1.append(y)
 
     # print(l1)
@@ -251,10 +308,17 @@ def admin_dashboard(request):
     Docter_req = User.objects.filter(is_active=False)
     b = Docter_req.count()
     # print(b)
+
+    m1 = ContactModel.objects.all().count()
+    m2 = ContactModel.objects.all()
+
     context = {
         'doc_req': Docter_req,
-        'count': b,
-        'ACT_DOC': l1
+        'count_req': b,
+        'ACT_DOC': l1,
+        'count': m1,
+        'act_doc_count': n,
+        'cobj':m2,
     }
     return render(request, 'dash_admin.html', context)
 
@@ -345,4 +409,46 @@ def PayModelUpdt(request, pk):
 
 
 def DocterDashView(request):
-    return render(request, 'dash_docter.html')
+
+    # val = request.user
+    # print(val.id)
+    mdl_doc = DoctorModel.objects.get(user=request.user.id)
+    # print(mdl_doc.id)
+    mdl = AppoinmentModel.objects.filter(doc=mdl_doc.id)
+    l1 = []
+    l2 = []
+
+    for l in mdl:
+
+        l1.append(l)
+        pmdl = PatientModel.objects.filter(user=l.visiter.id)
+        for x in pmdl:
+            l2.append(x)
+    zipped = zip(l1, l2)
+    # print(l1,l2)
+
+    context = {
+        'doc': mdl_doc,
+        'bookings': zipped,
+
+    }
+
+    return render(request, 'dash_docter.html', context)
+
+
+def Doc_Remove_Patient(request, pk):
+    # print(pk)
+    vr = AppoinmentModel.objects.get(id=pk)
+    vr.delete()
+    return redirect('DocterDashView')
+
+
+def ContactModelView(request):
+    if request.method == 'POST':
+        form = ContactModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    form = ContactModelForm()
+    return render(request, 'Contactus.html', {'form': form})

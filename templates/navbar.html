@@ -8,7 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <!-- ----------------------- -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 
 <!-- clr: #4e7fb0 -->
@@ -16,9 +18,9 @@
 <body style="background-color: whitesmoke;">
     {% if 'uid' in request.session %}
     <header>
-        <div class="row text-end">
+        <div class="row text-end text">
             <div class="N col-9 ">feedback</div>
-            <div class="N col-1 ">Contact us</div>
+            <div class="N col-1 "><a class="text-white" href="{% url 'ContactModelView' %}">Contact us</a></div>
             <div class="N col-1 ">Need help</div>
             <div class="N col-1 "></div>
         </div>
@@ -26,7 +28,10 @@
     <nav style="height: 100px;background-color: #328090;">
 
         <div class="row text-center " style="height: 100%;">
-            <div class="sty col-md-2 p-5"><a href="{% url 'index' %}"><img src="" alt="logo"></a></div>
+            <div class="sty col-md-2 p-3"><a href="{% url 'index' %}"><img class="rounded-2"
+                        style="height: 65px;width: 65px;"
+                        src="https://us.123rf.com/450wm/mantinov/mantinov2004/mantinov200400007/143789285-help-for-health-icon-logo-vector-graphic-design-helping-hands-inside-medical-cross-sign-.jpg?ver=6"
+                        alt="logo"></a></div>
             <div class=" col-md-4 "></div>
             <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span><i class="material-icons mx-1"
                             style="font-size:13px"> image</i></span>Gallery</a></div>
@@ -46,7 +51,7 @@
     <header>
         <div class="row text-end">
             <div class="N col-9 ">feedback</div>
-            <div class="N col-1 ">Contact us</div>
+            <div class="N col-1 "><a class="text-white" href="{% url 'ContactModelView' %}">Contact us</a></div>
             <div class="N col-1 ">Need help</div>
             <div class="N col-1 "></div>
         </div>
@@ -55,7 +60,10 @@
     <nav style="height: 100px;background-color: #328090;">
 
         <div class="row text-center " style="height: 100%;">
-            <div class="sty col-md-2 p-5"><a href="{% url 'index' %}"><img src="" alt="logo"></a></div>
+            <div class="sty col-md-2 p-3"><a href="{% url 'index' %}"><img class="rounded-2"
+                style="height: 65px;width: 65px;"
+                src="https://us.123rf.com/450wm/mantinov/mantinov2004/mantinov200400007/143789285-help-for-health-icon-logo-vector-graphic-design-helping-hands-inside-medical-cross-sign-.jpg?ver=6"
+                alt="logo"></a></div>
             <div class=" col-md-4 "></div>
             <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Gallery</a></div>
             <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Rsearches</a></div>
@@ -85,10 +93,12 @@
     header {
         background-color: #2b7786;
         padding: 7px;
+        
     }
 
     .N {
         color: azure;
+        text-decoration: none;
     }
 
     .sty {

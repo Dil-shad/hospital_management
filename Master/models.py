@@ -59,12 +59,13 @@ class PatientModel(models.Model):
 
 
 class AppoinmentModel(models.Model):
-    doc = models.CharField(max_length=10)
     visiter = models.ForeignKey(User, on_delete=models.CASCADE)
+    doc = models.CharField(max_length=10)
+
     date = models.CharField(max_length=15)
 
     def __str__(self):
-        return self.visiter
+        return self.date
 
 
 class PayModel(models.Model):
@@ -75,3 +76,10 @@ class PayModel(models.Model):
 
     def __str__(self):
         return self.fees
+
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    Mobile_Number = models.CharField(max_length=100, null=True, blank=True)
+    message = models.TextField(max_length=150)
