@@ -19,8 +19,11 @@ from .forms import *
 
 
 def index(request):
+    n = []
+    for x in range(4):
+        n.append(x)
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'obj': n})
 
 
 def booking_panel_view(request):
@@ -308,17 +311,14 @@ def admin_dashboard(request):
     Docter_req = User.objects.filter(is_active=False)
     b = Docter_req.count()
     # print(b)
-
     m1 = ContactModel.objects.all().count()
-    m2 = ContactModel.objects.all()
-
     context = {
         'doc_req': Docter_req,
         'count_req': b,
         'ACT_DOC': l1,
         'count': m1,
         'act_doc_count': n,
-        'cobj':m2,
+
     }
     return render(request, 'dash_admin.html', context)
 
@@ -405,6 +405,28 @@ def PayModelUpdt(request, pk):
         return redirect('admin_dashboard')
 
 
+def department_fun(request):
+
+    if request.method == 'POST':
+        val = request.POST['depp']
+        if len(val) >= 1:
+            try:
+                mdl = Docter_dep(
+                    department=val
+                )
+                mdl.save()
+                return redirect('department_fun')
+            except:
+                messages.info(request, 'Enter a valid department..!')
+                return redirect('department_fun')
+        else:
+            messages.info(request, 'Enter a valid department..!')
+            return redirect('department_fun')
+    var = Docter_dep.objects.all()
+    context = {
+        'obj': var
+    }
+    return render(request, 'depart.html', context)
 #----------doCTER-----------#
 
 
@@ -443,6 +465,49 @@ def Doc_Remove_Patient(request, pk):
     return redirect('DocterDashView')
 
 
+def doc_self_profile(request, pk):
+    print(pk)
+
+    #self_doc = request.user
+    depp = Docter_dep.objects.all()
+    var = DoctorModel.objects.get(user=pk)
+    return render(request, 'doc_update_profile.html', {'obj': var, 'depp': depp})
+
+
+def update_doc_profile(request, pk):
+    print(pk)
+    try:
+        if request.method == 'POST':
+            print('-=---------------------'+str(pk))
+            mdl = DoctorModel.objects.get(id=pk)
+            mdl.user.first_name = request.POST.get('fname')
+            mdl.user.email = request.POST.get('mail')
+            mdl.address = request.POST.get('addr')
+            mdl.mobile = request.POST.get('mobile')
+            mdl.qualification = request.POST.get('qualf')
+
+            if request.POST.get('department') is not None:
+                dep = request.POST.get('department')
+                dep = Docter_dep.objects.get(id=dep)
+                mdl.department = dep
+
+            else:
+                pass
+            if request.FILES.get('file') is not None:
+                mdl.image = request.FILES.get('file')
+            else:
+                pass
+            mdl.user.save()
+
+            mdl.department.save()
+            mdl.save()
+            return redirect('DocterDashView')
+
+    except:
+        pass
+
+
+#-------------------------#
 def ContactModelView(request):
     if request.method == 'POST':
         form = ContactModelForm(request.POST)
@@ -452,3 +517,21 @@ def ContactModelView(request):
 
     form = ContactModelForm()
     return render(request, 'Contactus.html', {'form': form})
+
+
+def feedback_view_list_fun(request):
+
+    m2 = ContactModel.objects.all()
+    context = {
+
+        'cobj': m2,
+    }
+    return render(request, 'feedbackview.html', context)
+
+
+def delete_contact_fun(request, pk):
+    print(pk)
+    mdl = ContactModel.objects.get(id=pk)
+    mdl.delete()
+
+    return redirect('admin_dashboard')

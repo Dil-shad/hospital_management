@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from tomlkit import date
 
-# departments = [('Cardiologist', 'Cardiologist'),
+#                  [('Cardiologist', 'Cardiologist'),
 #                ('Dermatologists', 'Dermatologists'),
 #                ('Emergency Medicine Specialists',
 #                 'Emergency Medicine Specialists'),

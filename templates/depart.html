@@ -1,0 +1,53 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 p-5">
+            <table class="table ">
+                <thead>
+                    <th>ID</th>
+                    <th>Departments</th>
+                </thead>
+                <tbody>
+                    {% for i in obj %}
+
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.department}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+
+            </table>
+
+
+
+
+
+
+        </div>
+        <div class="col-6 p-5 text-center">
+            <form action="{% url 'department_fun' %}" method="post">
+                {% csrf_token %}
+                <label for="deopartment" class="form-label">New Department:</label>
+                <input type="text" name="depp" class="from-control" placeholder="Enter here">
+                <div class="text-center">
+                    {% for message in messages %}
+                    <p class="text-danger">{{message}}</p>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-success w-50 mt-4">Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

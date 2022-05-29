@@ -31,7 +31,7 @@
             <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Events</a></div>
             <div class="sty col-md-1 pt-5 "><a class="text-white" href="{% url 'booking_panel_view' %}"><span></span>
                     News</a></div>
-            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Profile</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="{% url 'doc_self_profile' request.user.id %}"><span></span>Profile</a></div>
             <div class=" col-md-2 p-5"> <button class="btn btn-danger " style="position: absolute;right: 1%;"
                     type="button"><a style="color: white;text-decoration: none;"
                         href="{% url 'logout' %}">Logout</a></button></div>
@@ -39,9 +39,11 @@
         </div>
 
     </nav>
-    </nav>
+ 
 
-
+    {% for message in messages %}
+    <p class="text-danger">{{message}}</p>
+    {% endfor %}
 
 
 

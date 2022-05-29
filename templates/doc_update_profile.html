@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>HMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body id="bg" class="text-white">
+    <!-- <header>
+        <div class="row text-end" style="background-color: #328090;color: rgb(255, 255, 255);">
+            <div class="N col-9 ">feedback</div>
+            <div class="N col-1 ">Contact us</div>
+            <div class="N col-1 ">Need help</div>
+            <div class="N col-1 "></div>
+        </div>
+    </header> -->
+    <nav style="height: 100px;background-color: #328090;">
+
+        <div class="row text-center " style="height: 100%;">
+            <div class="sty col-md-2 p-5"><a href="{% url 'index' %}"><img src="" alt="logo"></a></div>
+            <div class=" col-md-4 "></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span><i class="material-icons mx-1"
+                            style="font-size:13px"> image</i></span>Gallery</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Events</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="{% url 'booking_panel_view' %}"><span></span>
+                    News</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white"
+                    href="{% url 'doc_self_profile' request.user.id %}"><span></span>Profile</a></div>
+            <div class=" col-md-2 p-5"> <button class="btn btn-danger " style="position: absolute;right: 1%;"
+                    type="button"><a style="color: white;text-decoration: none;"
+                        href="{% url 'logout' %}">Logout</a></button></div>
+
+        </div>
+
+    </nav>
+
+
+
+
+
+
+    <div class="container p-3">
+
+        <div class="row">
+
+
+            <div class="col-5">
+
+
+                <form action="{% url 'update_doc_profile' obj.id %}" method="post" class="text-center "
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <img class=" rounded-1  mx-auto w-25" src="{{obj.image.url}}" alt="profile_pic">
+
+                    <div class="text-center mt-4">
+                        <input class="form-control" type="text" name="fname" value="{{obj.user.first_name}}"
+                            placeholder="fname"><br>
+
+                        <input class="form-control" type="email" name="mail" value="{{obj.user.email}}"
+                            placeholder="email"><br>
+
+                        <input class="form-control" type="text" name="addr" value="{{obj.address}}"
+                            placeholder="adreess"><br>
+
+
+                        <input class="form-control" type="text" name="mobile" value="{{obj.mobile}}"
+                            placeholder="moblile"><br>
+
+                        <input class="form-control" type="text" name="qualf" value="{{obj.qualification}}"
+                            placeholder="qualification"><br>
+
+                        <p class="text-danger">Current:deppartment:{{obj.department.department}}</p>
+                        <select class="form-control m-2" name="department" id="cat">
+                            <option selected="selected" disabled>Select Department:~</option>
+                            {% for dep in depp %}
+
+
+                            <option value="{{dep.id}}">{{dep}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-outline form-white">
+                            <label class="form-label mx-2 text-danger" for="form3Examplea9">Update Profile Picture:</label>
+                            <input type="file" name="file" id="" accept="image/*"
+                                class="form-control form-control-md mx-2 mb-2">
+
+                        </div>
+                    </div>
+
+
+                    {% for message in messages %}
+                    <p class="text-danger">{{message}}</p>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+
+
+                </form>
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <div class="col-7 ">
+            <div class="text-center pt-3 float-end">
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+    <!-- <footer class="h-0 mt-3 w-100" >
+        <div class="row text-center bg-dark">
+            <p class="text-white mx-auto"><small>@copyright</small></p>
+        </div>
+    </footer> -->
+</body>
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    #bg {
+        background-size: 100%;
+        background-image: url('{% static "/bg/dp.jpg" %}');
+        background-repeat: repeat-x;
+        background-color: #41a5e1;
+
+    }
+</style>
+
+</html>

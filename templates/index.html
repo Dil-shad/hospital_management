@@ -1,6 +1,6 @@
 {% extends "navbar.html" %}
 
-
+{% load static %}
 {% block content %}
 
 
@@ -30,7 +30,7 @@
                 <div class="carousel-caption"
                     style="position: absolute;left: 60%;bottom: 25%;border: hidden;width: 30%;background: rgba(61, 121, 111, 0.137);border-radius: 5%; padding: 3%;">
                     <h3>3</h3>
-                    <p>We love the Big Apple!</p>
+                    <p>We love to Care Always!</p>
                 </div>
             </div>
         </div>
@@ -44,15 +44,64 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+        <img class="w-100 " style="height: 150px;"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDlaA41RUOnEiQ1_YG_MGWA7Fb9FCKUnIxsDqlGcdXM2-jiJX7DVrR97dO3fJ7L8aeHA&usqp=CAU"
+            alt="">
     </div>
-</section>
-<section id="sec2" style="height: 100vh;background-color: whitesmoke;position: relative;">
-<H1>sectin2</H1>
-<footer class="w-100 h-25 bg-dark text-white" style="position: absolute;left: 0;bottom: 0;">
-    <div class="text-center pt-5"> copy right</div>
-  </footer>
-</section>
 
 
 
-{% endblock content %}
+
+
+
+    <section class="min-h-100vh " id="sec2" style="background-color: #245c6d;position: relative;">
+        <div class="container p-4 ">
+            <H1 class="text-white fw-bold">Our Docters</H1>
+           
+
+
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+
+        </div>
+        </div>
+        <div id='bg-c' class="container-fluid p-3"
+            style="background-image: url('https://www.asterhospitals.in/themes/custom/aster/images/one-aster-bg.webp');width: 100%;height: 100vh;">
+            <div class="container pt-5">
+                <h2 class="fw-bold" style="color: #0a2a6c;">HMS</h2>
+                <p style="color: #384f7e;">Personalized Medical Assistant for all your healthcare needs. <br>
+                    Book instant appointment, pay securely, eConsult with our doctors and save all your health records
+                    <br>
+                    at one place are some of the benefits of OneAster App. It is everything you need, to manage your
+                    family Health.
+                </p>
+                <div class="row pt-3">
+                    <img class="border-end" src="https://www.asterhospitals.in/themes/custom/aster/images/one-aster-qr.svg" alt="" style="width: 6rem;">
+                    <div class="col">
+                        <img class="" src="https://www.asterhospitals.in/sites/default/files/2020-11/apple-appstore.png"
+                            alt="" style="max-width: 10.5rem"><br><br>
+                        <img src="https://www.asterhospitals.in/sites/default/files/2020-11/google-playstore.png" alt=""
+                            style="max-width: 10.5rem">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    {% endblock content %}

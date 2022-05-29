@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="containeer p-5 w-75">
+
+
+
+
+    <div class="text-center">
+        <h4 class="text-center"><strong>Feedbacks</strong></h4>
+    </div>
+    <form action="showemp" method="post">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                   
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">action</th>
+
+                </tr>
+            </thead>
+            {% for emp in cobj %}
+            <tbody>
+                <tr>
+                    
+                    <td>{{emp.name}}</td>
+                    <td>{{emp.email}}</td>
+                    <td>{{emp.message}}</td>
+                    <td>
+                        <a href="{% url 'delete_contact_fun' emp.id %}"><span
+                                class="fa fa-trash text-dark"> Delete</span>
+                    </td>
+
+                </tr>
+                 {% endfor %}
+
+            </tbody>
+           
+        </table>
+
+    </form>
+
+
+
+
+
+
+
+
+
+</div>
+{% endblock content %}

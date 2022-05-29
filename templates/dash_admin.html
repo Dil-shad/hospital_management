@@ -1,7 +1,8 @@
-{% extends "navbar.html" %}
-
-
+{% extends 'admin_base.html' %}
 {% block content %}
+
+
+
 
 <div class="conatiner pt-3">
 
@@ -30,10 +31,12 @@
     <div class="col-2 h-100 text-center  btn-outline-light">
       <div style="height: 100px;background-color: #0d5572;" class="mx-1">
         <div class="text-center pt-2">
-          <h2><Strong>{{count}}</Strong></h2>
+          <a class="text-white" href="{% url 'feedback_view_list_fun' %}">
+            <h2><Strong>{{count}}</Strong></h2>
 
-          FeedBack
-          <br>
+            FeedBack
+            <br>
+          </a>
         </div>
       </div>
     </div>
@@ -107,60 +110,6 @@
     </div>
   </div>
 </div>
-
-
-<section class=" p-5" style="position: relative; height: 75vh;">
-  <div class="containeer p-5 w-75">
-
-    <div class="text-center">
-      <h4 class="text-center"><strong>Feedbacks</strong></h4>
-    </div>
-    <form action="showemp" method="post">
-      <table class="table table-striped ">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Message</th>
-            <th scope="col">action</th>
-
-          </tr>
-        </thead>
-        {% for emp in cobj %}
-        <tbody>
-          <tr>
-            <th scope="row">{{emp.id}}</th>
-            <td>{{emp.name}}</td>
-            <td>{{emp.email}}</td>
-            <td>{{emp.message}}</td>
-            <td>
-              <a href="/delete/{{ emp.id }}"><span class="fa fa-trash text-dark">Delete</span>
-            </td>
-
-          </tr>
-
-        </tbody>
-        {% endfor %}
-      </table>
-
-    </form>
-
-
-
-
-
-
-
-
-
-  </div>
-
- 
-
-
-</section>
-
 
 
 
