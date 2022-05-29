@@ -19,11 +19,24 @@ from .forms import *
 
 
 def index(request):
-    n = []
-    for x in range(4):
-        n.append(x)
 
-    return render(request, 'index.html', {'obj': n})
+    var = DoctorModel.objects.all()
+    l1 = []
+    n = 0
+
+    for x in var:
+        var1 = User.objects.filter(id=x.user.id, is_active=True)
+        for m in var1:
+            xx = DoctorModel.objects.filter(user=m.id)
+            for y in xx:
+                n = n+1
+                l1.append(y)
+
+        context = {
+            'obj': l1
+        }
+
+    return render(request, 'index.html', context)
 
 
 def booking_panel_view(request):
@@ -100,7 +113,21 @@ def appoinment_mdl_save(request, pk):
                 date=dt
             )
             mdl.save()
+            # ==========================todo +default img view
             messages.info(request, 'we will sent your token soon..!')
+            ''' subject = 'MAIL INCOMING'
+    message = 'Dear '+name + \
+        '\nYour Account is Approved.\nYou can login now.\nUsername:'+uname + '\nDate:'+dt
+    recipient = g.email
+    try:
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient])
+        print('mail_send')
+        g.save()
+        return redirect('admin_dashboard')
+    except:
+        raise ConnectionError
+        print('-----someting wrong---------------------Check INTERNET-----------------')'''
+
         else:
             messages.info(request, 'pick a valid date')
             return redirect('booking_appoinment', pk=var.id)
