@@ -27,7 +27,7 @@
 
 <!-- clr: #4e7fb0 -->
 
-<body style="background-color: whitesmoke;position: relative;">
+<body style="background-color: whitesmoke;position: relative;min-height: 100vh;">
     {% if 'uid' in request.session %}
     <header>
         <div class="row text-end text">
@@ -81,7 +81,7 @@
             <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Rsearches</a></div>
             <div class="sty col-md-1 pt-5 "><a class="text-white"
                     href="{% url 'booking_panel_view' %}"><span></span>Appoinment</a></div>
-            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>None</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Covid-19</a></div>
             <div class=" col-md-2 p-5"> <a
                     style="color: white;text-decoration: none;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"
                     href="{% url 'loginView' %}">LOGIN</a></div>

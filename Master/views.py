@@ -50,6 +50,8 @@ def booking_panel_view(request):
             for y in xx:
                 l1.append(y)
 
+
+
     context = {
         'docs': l1
     }
@@ -98,10 +100,11 @@ def booking_appoinment(request, pk):
 
 
 def appoinment_mdl_save(request, pk):
-
+    
     var = DoctorModel.objects.get(id=pk)
     docter_id = var.id
     patient_id = request.user
+   
     if request.method == 'POST':
         dt = request.POST['bdate']
         md = AppoinmentModel.objects.filter(visiter=request.user, date=dt)
@@ -114,19 +117,34 @@ def appoinment_mdl_save(request, pk):
             )
             mdl.save()
             # ==========================todo +default img view
-            messages.info(request, 'we will sent your token soon..!')
-            ''' subject = 'MAIL INCOMING'
-    message = 'Dear '+name + \
-        '\nYour Account is Approved.\nYou can login now.\nUsername:'+uname + '\nDate:'+dt
-    recipient = g.email
-    try:
-        send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient])
-        print('mail_send')
-        g.save()
-        return redirect('admin_dashboard')
-    except:
-        raise ConnectionError
-        print('-----someting wrong---------------------Check INTERNET-----------------')'''
+            messages.info(request, 'Check your mail For Booking details..!!')
+
+            lst=[tok for tok in range(1,26) ]
+            print(lst)
+            
+            obj=PatientModel.objects.get(user=request.user)
+            name=obj.user.first_name
+            token= ' Get from counter befor 10am'
+
+            subject = 'Booking Mail'
+            message = 'Dear '+name + \
+                '\nYour booking details are below here.\nName:'+name+'\n Date:'+dt+'\nToken:'+str(token)+''
+                
+            recipient = obj.user.email
+            try:
+                send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient])
+                print('mail_send')
+                
+                
+            except:
+                raise ConnectionError
+                print('-----someting wrong---------------------Check INTERNET-----------------')
+
+        
+
+
+
+
 
         else:
             messages.info(request, 'pick a valid date')
@@ -161,12 +179,13 @@ def docter_reg(request):
             if request.FILES.get('file') is not None:
                 image = request.FILES['file']
             else:
-                image = "/static/image/default.png"
+                messages.info(request, 'must upload an image')
+                return redirect('docter_reg_view')
 
             if pwd == cpwd:
                 if User.objects.filter(username=uname).exists():
                     messages.info(request, 'username already exists...!!')
-                    return redirect('docter_reg')
+                    return redirect('docter_reg_view')
                 # elif User.objects.filter(email=email).exists():
                 #     messages.info(request, 'email already registerd..!!')
                 #     return redirect('docter_reg')
@@ -191,10 +210,10 @@ def docter_reg(request):
                     )
 
                     ex.save()
-                    return redirect('docter_reg_view')
+                    return redirect('loginView')
             else:
                 messages.info(request, 'paswd doesnt match..!!')
-                return redirect('docter_reg')
+                return redirect('docter_reg_view')
         # return redirect('docter_reg_view')
     except:
         messages.info(request, 'Please Fill The form')
@@ -495,7 +514,7 @@ def Doc_Remove_Patient(request, pk):
 def doc_self_profile(request, pk):
     print(pk)
 
-    #self_doc = request.user
+    # self_doc = request.user
     depp = Docter_dep.objects.all()
     var = DoctorModel.objects.get(user=pk)
     return render(request, 'doc_update_profile.html', {'obj': var, 'depp': depp})

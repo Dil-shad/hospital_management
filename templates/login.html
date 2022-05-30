@@ -1,38 +1,99 @@
-{% extends "navbar.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
 
-
-{% block content %}
-
-<div class="container text-center justify-content-center">
-
-
-    <div class="row">
-        <div class="col"></div>
-        <div class="col">
-            <form action="{% url 'loginView' %}" method="post" class="m-5">
-                {% csrf_token %}
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Username</span>
-                    <input name="username" class="form-control" type="text" placeholder="enter Username">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Password</span>
-                    <input name="password" class="form-control" type="password" placeholder="password">
-                </div>
-                <div class="text-center">
-                    {% for message in messages %}
-                    <p style="color: brown;">{{message}}</p>
-                    {% endfor %}
-                    <button class="btn btn-info w-50" type="submit">Login</button>
-                </div>
-                <p>Don't have an account? <a href="{% url 'patient_reg_view' %}">Register</a></p>
-                
-            </form>
+<body style="position: relative;min-height: 100vh;">
+    <header>
+        <div class="row text-end text">
+            <div class="N col-9 ">feedback</div>
+            <div class="N col-1 "><a class="text-white" href="{% url 'ContactModelView' %}">Contact us</a></div>
+            <div class="N col-1 ">Need help</div>
+            <div class="N col-1 "></div>
         </div>
-        <div class="col"></div>
+    </header>
+    <nav style="height: 100px;background-color: #328090;">
+
+        <div class="row text-center " style="height: 100%;">
+            <div class="sty col-md-2 p-3"><a href="{% url 'index' %}"><img class="rounded-2"
+                        style="height: 65px;width: 65px;"
+                        src="https://us.123rf.com/450wm/mantinov/mantinov2004/mantinov200400007/143789285-help-for-health-icon-logo-vector-graphic-design-helping-hands-inside-medical-cross-sign-.jpg?ver=6"
+                        alt="logo"></a></div>
+            <div class=" col-md-4 "></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span><i class="material-icons mx-1"
+                            style="font-size:13px"> image</i></span>Gallery</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>Rsearches</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white"
+                    href="{% url 'booking_panel_view' %}"><span></span>Appoinment</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="#"><span></span>None</a></div>
+            <div class="sty col-md-1 pt-5 "><a class="text-white" href="{% url 'docter_reg_view' %}"><span></span>New Staff?</a></div>
+
+            <!-- <div class=" col-md-2 p-5"> <button class="btn btn-danger " style="position: absolute;right: 1%;"
+                    type="button"><a style="color: white;text-decoration: none;"
+                        href="{% url 'logout' %}">Logout</a></button></div> -->
+
+        </div>
+
+    </nav>
+    <div class="container text-center ">
+
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <form action="{% url 'loginView' %}" method="post" class="m-5">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Username</span>
+                        <input name="username" class="form-control" type="text" placeholder="enter Username">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Password</span>
+                        <input name="password" class="form-control" type="password" placeholder="password">
+                    </div>
+                    <div class="text-center">
+                        {% for message in messages %}
+                        <p style="color: brown;">{{message}}</p>
+                        {% endfor %}
+                        <button class="btn btn-info w-50" type="submit">Login</button>
+                    </div>
+                    <p>Don't have an account? <a href="{% url 'patient_reg_view' %}">Register</a></p>
+
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+
     </div>
 
-</div>
 
-{% endblock content %}
+
+
+    <footer class="w-100  bg-dark text-white " style="position: absolute;left: 0;bottom: 0;margin-top: 25px;">
+        <div class="text-center p-2"> <span><i class="fa fa-copyright " style="font-size:10px"></i></span> copyright-
+            DD</div>
+    </footer>
+
+</body>
+<style>
+    header {
+        background-color: #2b7786;
+        padding: 7px;
+        color: white;
+
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+</html>
